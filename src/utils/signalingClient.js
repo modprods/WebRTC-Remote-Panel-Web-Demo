@@ -1,18 +1,21 @@
+export const SIGNALING_WS_URL = "wss://moreoptimism.rackandpin.com:443/watch";
+
 class SignalingClient {
-    constructor(address, port, reactSetWebsocketClientsHandler, reactSetConnectedToServerHandler) {
+    constructor(wsUrl, reactSetWebsocketClientsHandler, reactSetConnectedToServerHandler) {
         this.connectedToServer = false;
         this.clients = [];
-
-        this.open(address, port, reactSetWebsocketClientsHandler, reactSetConnectedToServerHandler);
-
+        this.wsUrl = wsUrl;
         this.reactClientsHandler = reactSetWebsocketClientsHandler;
         this.reactConnectedHandler = reactSetConnectedToServerHandler;
 
         this.id = -1;
+
+        this.open(wsUrl);
     }
 
-    open(address, port, clientsHandler, connectedHandler) {
-        this.webSocket = new WebSocket(address + ':' + port)
+    open(wsUrl) {
+        const url = wsUrl ?? this.wsUrl;
+        this.webSocket = new WebSocket(url);
 
         this.webSocket.onopen = () => {
             console.log('[WEBSOCKET] Client connected');

@@ -9,12 +9,10 @@ import MediaPanel from "./components/MediaPanel";
 
 // Handles and util fonctions
 import WebRTCConnection from "./utils/webRTCConnection";
-import SignalingClient from "./utils/signalingClient";
+import SignalingClient, { SIGNALING_WS_URL } from "./utils/signalingClient";
 
 function App() {
 	// App state management à la React
-	const [port, setPort] = useState(443);
-	const [address, setAddress] = useState("wss://127.0.0.1");
 	const [webSocketClients, setWebSocketClients] = useState([]);
 	const [connectedToServer, setConnectedToServer] = useState(false);
 	const [mouseDataChannel, setMouseDataChannel] = useState();
@@ -29,8 +27,7 @@ function App() {
 	useEffect(() => {
 		// Instantiate Websocket and bing its handlers
 		let signalingClient = new SignalingClient(
-			address,
-			port,
+			SIGNALING_WS_URL,
 			setWebSocketClients,
 			setConnectedToServer
 		);
@@ -56,14 +53,11 @@ function App() {
 			<h1>TD WebRTC Web Demo 🍌</h1>
 			<Grid container spacing={{ xl: 2 }} columns={{ xl: 1 }}>
 				<SignalingClientPanel
-					address={address}
-					port={port}
+					signalingWsUrl={SIGNALING_WS_URL}
 					clients={webSocketClients}
 					connectedToServer={connectedToServer}
 					signalingClient={signalingClient}
 					webRTCConnection={webRTCConnection}
-					setPortHandler={setPort}
-					setAddressHandler={setAddress}
 				/>
 				<MediaPanel
 					mouseDataChannel={mouseDataChannel}

@@ -1,12 +1,12 @@
 import {
 	Container,
 	Button,
-	TextField,
 	List,
 	ListItem,
 	ListItemButton,
 	ListItemText,
 	Divider,
+	Typography,
 	useTheme,
 	useMediaQuery,
 } from "@mui/material";
@@ -15,13 +15,10 @@ function SignalingClientPanel(props) {
 	// React properties passed in App.js
 	const {
 		clients,
-		address,
-		port,
+		signalingWsUrl,
 		connectedToServer,
 		signalingClient,
 		webRTCConnection,
-		setPortHandler,
-		setAddressHandler,
 	} = props;
 
 	const theme = useTheme();
@@ -46,45 +43,18 @@ function SignalingClientPanel(props) {
 		fontSize: "10px",
 	};
 
-	// Event handlers bound to text fields, they use the passed properties functions
-	const handleAddressChange = (event) => {
-		console.log("Signaling Host Address was changed");
-		setAddressHandler(event.target.value);
-	};
-	const handlePortChange = (event) => {
-		console.log("Signaling Host Port was changed");
-		setPortHandler(event.target.value);
-	};
-
 	return (
 		<Container id="tdSignaling" style={componentStyle}>
-			<h2>Signaling server settings: </h2>
-			<h3>IP Address</h3>
-			<TextField
-				variant="standard"
-				label="Address"
-				id="adress"
-				defaultValue={address}
-				disabled={connectedToServer}
-				onChange={(event) => handleAddressChange(event)}
-			>
-				{address}
-			</TextField>
-			<h3>Port</h3>
-			<TextField
-				variant="standard"
-				label="Port"
-				id="port"
-				defaultValue={port}
-				disabled={connectedToServer}
-				onChange={(event) => handlePortChange(event)}
-			></TextField>
+			<h2>Signaling server</h2>
+			<Typography variant="body2" sx={{ wordBreak: "break-all", mb: 1 }}>
+				{signalingWsUrl}
+			</Typography>
 			<Button
 				variant="contained"
 				id="btnConnect"
 				style={buttonStyle}
 				disabled={connectedToServer}
-				onClick={() => signalingClient.open(address, port)}
+				onClick={() => signalingClient.open()}
 			>
 				Connect
 			</Button>

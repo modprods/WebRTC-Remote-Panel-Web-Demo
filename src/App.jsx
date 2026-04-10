@@ -50,7 +50,8 @@ function App() {
 	return (
 		<Container id="tdApp" maxWidth="xl">
 			<CssBaseline />
-			<h1>TD WebRTC Web Demo 🍌</h1>
+			<h1>Mod Remote Admin Panel</h1>
+		        <p><img src="https://d1pxeqjdb63hyy.cloudfront.net/media/images/more-optimism-qr.original.jpg"/></p>
 			<Grid container spacing={{ xl: 2 }} columns={{ xl: 1 }}>
 				<SignalingClientPanel
 					signalingWsUrl={SIGNALING_WS_URL}

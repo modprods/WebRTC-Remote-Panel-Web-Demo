@@ -51,7 +51,7 @@ function App() {
 		<Container id="tdApp" maxWidth="xl">
 			<CssBaseline />
 			<h1>Mod Remote Admin Panel</h1>
-		        <p><img src="https://d1pxeqjdb63hyy.cloudfront.net/media/images/more-optimism-qr.original.jpg"/></p>
+		        <p><a href="/"><img src="https://d1pxeqjdb63hyy.cloudfront.net/media/images/more-optimism-qr.original.jpg"/></a></p>
 			<Grid container spacing={{ xl: 2 }} columns={{ xl: 1 }}>
 				<SignalingClientPanel
 					signalingWsUrl={SIGNALING_WS_URL}
